@@ -1,25 +1,27 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../../styles/auth-shared.css";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
-const FoodPartnerRegister = () => {
+axios.defaults.withCredentials = true;
+
+const FoodPartnerRegister = ({ setUser }) => {
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const businessName = e.target.businessName.value;
-    const contactName = e.target.contactName.value;
-    const phone = e.target.phone.value;
-    const email = e.target.email.value;
-    const password = e.target.password.value;
-    const address = e.target.address.value;
+    const businessName = e.target.businessName.value.trim();
+    const contactName = e.target.contactName.value.trim();
+    const phone = e.target.phone.value.trim();
+    const email = e.target.email.value.trim();
+    const password = e.target.password.value.trim();
+    const address = e.target.address.value.trim();
 
-    axios
-      .post(
-        `${import.meta.env.VITE_BACKEND_URL}/auth/food-partner/register`,
+    try {
+      // 1️⃣ Register new food partner
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/auth/food-partner/register`,
         {
           name: businessName,
           contactName,
@@ -29,14 +31,25 @@ const FoodPartnerRegister = () => {
           address,
         },
         { withCredentials: true }
-      )
-      .then((response) => {
-        console.log(response.data);
-        navigate("/create-food"); // Redirect to create food page after successful registration
-      })
-      .catch((error) => {
-        console.error("There was an error registering!", error);
-      });
+      );
+
+      console.log("✅ Registration success:", response.data);
+
+      // 2️⃣ Immediately verify token (to sync app state)
+      const verify = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/auth/user/me`,
+        { withCredentials: true }
+      );
+
+      console.log("👤 Verified user:", verify.data.user);
+      if (setUser) setUser(verify.data.user);
+
+      // 3️⃣ Redirect to create-food page
+      navigate("/create-food");
+    } catch (error) {
+      console.error("❌ There was an error registering!", error);
+      alert(error.response?.data?.message || "Registration failed. Try again!");
+    }
   };
 
   return (
@@ -52,11 +65,13 @@ const FoodPartnerRegister = () => {
           </h1>
           <p className="auth-subtitle">Grow your business with our platform.</p>
         </header>
+
         <nav className="auth-alt-action" style={{ marginTop: "-4px" }}>
           <strong style={{ fontWeight: 600 }}>Switch:</strong>{" "}
           <Link to="/user/register">User</Link> •{" "}
           <Link to="/food-partner/register">Food partner</Link>
         </nav>
+
         <form className="auth-form" onSubmit={handleSubmit} noValidate>
           <div className="field-group">
             <label htmlFor="businessName">Business Name</label>
@@ -65,8 +80,10 @@ const FoodPartnerRegister = () => {
               name="businessName"
               placeholder="Tasty Bites"
               autoComplete="organization"
+              required
             />
           </div>
+
           <div className="two-col">
             <div className="field-group">
               <label htmlFor="contactName">Contact Name</label>
@@ -75,6 +92,7 @@ const FoodPartnerRegister = () => {
                 name="contactName"
                 placeholder="Jane Doe"
                 autoComplete="name"
+                required
               />
             </div>
             <div className="field-group">
@@ -84,9 +102,11 @@ const FoodPartnerRegister = () => {
                 name="phone"
                 placeholder="+1 555 123 4567"
                 autoComplete="tel"
+                required
               />
             </div>
           </div>
+
           <div className="field-group">
             <label htmlFor="email">Email</label>
             <input
@@ -95,8 +115,10 @@ const FoodPartnerRegister = () => {
               type="email"
               placeholder="business@example.com"
               autoComplete="email"
+              required
             />
           </div>
+
           <div className="field-group">
             <label htmlFor="password">Password</label>
             <input
@@ -105,8 +127,10 @@ const FoodPartnerRegister = () => {
               type="password"
               placeholder="Create password"
               autoComplete="new-password"
+              required
             />
           </div>
+
           <div className="field-group">
             <label htmlFor="address">Address</label>
             <input
@@ -114,15 +138,18 @@ const FoodPartnerRegister = () => {
               name="address"
               placeholder="123 Market Street"
               autoComplete="street-address"
+              required
             />
             <p className="small-note">
               Full address helps customers find you faster.
             </p>
           </div>
+
           <button className="auth-submit" type="submit">
             Create Partner Account
           </button>
         </form>
+
         <div className="auth-alt-action">
           Already a partner? <Link to="/food-partner/login">Sign in</Link>
         </div>
