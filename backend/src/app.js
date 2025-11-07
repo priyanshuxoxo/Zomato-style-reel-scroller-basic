@@ -9,7 +9,11 @@ const foodPartnerRoutes = require("./routes/food-partner.routes");
 const app = express();
 app.use(
   cors({
-    origin: ["http://localhost:5174", "http://localhost:5173"],
+    origin: [
+      "http://localhost:5174",
+      "http://localhost:5173",
+      "https://zomato-style-reel-scroller-basic-jv.vercel.app",
+    ],
     credentials: true,
   })
 );
