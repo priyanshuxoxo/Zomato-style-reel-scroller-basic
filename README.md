@@ -60,7 +60,7 @@ npm install
 Inside `backend/.env`, add your credentials:
 
 ```env
-MONGODB_URI=mongodb://localhost:27017/food-view
+MONGODB_URI=your-mongodb-url
 JWT_SECRET=your_jwt_secret_here
 
 # ImageKit Keys
