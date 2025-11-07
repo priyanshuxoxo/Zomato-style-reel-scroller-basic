@@ -70,7 +70,7 @@ const CreateFood = () => {
       }
     );
 
-    console.log(response.data);
+    // console.log(response.data);
     navigate("/home"); // ✅ Redirect to home after upload
   };
 

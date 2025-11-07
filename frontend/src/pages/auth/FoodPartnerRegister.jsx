@@ -33,7 +33,7 @@ const FoodPartnerRegister = ({ setUser }) => {
         { withCredentials: true }
       );
 
-      console.log("✅ Registration success:", response.data);
+      // console.log("✅ Registration success:", response.data);
 
       // 2️⃣ Immediately verify token (to sync app state)
       const verify = await axios.get(
@@ -41,7 +41,7 @@ const FoodPartnerRegister = ({ setUser }) => {
         { withCredentials: true }
       );
 
-      console.log("👤 Verified user:", verify.data.user);
+      // console.log("👤 Verified user:", verify.data.user);
       if (setUser) setUser(verify.data.user);
 
       // 3️⃣ Redirect to create-food page

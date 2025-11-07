@@ -31,11 +31,11 @@ const AppRoutes = () => {
     axios
       .get("/api/auth/user/me")
       .then((res) => {
-        console.log("✅ User verified:", res.data.user);
+        // console.log("✅ User verified:", res.data.user);
         setUser(res.data.user);
       })
       .catch((err) => {
-        console.log("❌ Not logged in:", err);
+        // console.log("❌ Not logged in:", err);
         setUser(null);
       })
       .finally(() => setLoading(false));

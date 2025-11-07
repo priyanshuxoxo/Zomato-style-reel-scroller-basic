@@ -22,15 +22,11 @@ const UserLogin = ({ setUser }) => {
         { withCredentials: true }
       );
 
-      console.log("✅ Login response:", response.data);
-
       // Step 2️⃣ - Immediately verify using /me route
       const verifyResponse = await axios.get(
         `${import.meta.env.VITE_BACKEND_URL}/api/auth/user/me`,
         { withCredentials: true }
       );
-
-      console.log("👤 Verified user:", verifyResponse.data.user);
 
       // Step 3️⃣ - Update global user state
       if (setUser) setUser(verifyResponse.data.user);
