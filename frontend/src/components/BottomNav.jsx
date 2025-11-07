@@ -9,7 +9,7 @@ const BottomNav = () => {
   const handleLogout = async () => {
     try {
       await axios.post(
-        "http://localhost:3000/api/auth/user/logout",
+        `${import.meta.env.VITE_BACKEND_URL}/api/auth/user/logout`,
         {},
         { withCredentials: true }
       );

@@ -63,7 +63,7 @@ const CreateFood = () => {
     formData.append("mama", videoFile); // check backend expects "mama" key
 
     const response = await axios.post(
-      "http://localhost:3000/api/food",
+      `${import.meta.env.VITE_BACKEND_URL}/api/food`,
       formData,
       {
         withCredentials: true,

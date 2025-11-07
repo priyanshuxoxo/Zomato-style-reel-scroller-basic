@@ -8,7 +8,9 @@ const Saved = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/food/save", { withCredentials: true })
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/food/save`, {
+        withCredentials: true,
+      })
       .then((response) => {
         const savedFoods = response.data.savedFoods
 
@@ -35,7 +37,7 @@ const Saved = () => {
   const removeSaved = async (item) => {
     try {
       await axios.post(
-        "http://localhost:3000/api/food/save",
+        `${import.meta.env.VITE_BACKEND_URL}/api/food/save`,
         { foodId: item._id },
         { withCredentials: true }
       );
