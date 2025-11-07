@@ -1,0 +1,203 @@
+/* ===============================
+   🌙 FOODVIEW FRONT PAGE STYLING
+   =============================== */
+
+.front-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #0a0f1a 0%, #1a2235 100%);
+  color: #f5f6fa;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  overflow-x: hidden;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 0.9s ease-in-out forwards;
+}
+
+/* ===============================
+   HERO SECTION
+   =============================== */
+.front-hero {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+}
+
+/* Glassmorphism card */
+.front-content {
+  width: 100%;
+  max-width: 720px;
+  background: rgba(24, 34, 55, 0.85);
+  border-radius: 18px;
+  padding: 3.5rem 2.5rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.front-content:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+}
+
+/* ===============================
+   TYPOGRAPHY
+   =============================== */
+.front-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: #ffffff;
+  opacity: 0;
+  animation: fadeInUp 0.9s ease-in-out forwards;
+  animation-delay: 0.1s;
+}
+
+.front-tagline {
+  font-size: 1.1rem;
+  opacity: 0;
+  color: #cfd4df;
+  margin-bottom: 2.5rem;
+  animation: fadeInUp 0.9s ease-in-out forwards;
+  animation-delay: 0.3s;
+}
+
+/* ===============================
+   BUTTONS
+   =============================== */
+.front-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeInUp 0.9s ease-in-out forwards;
+  animation-delay: 0.5s;
+}
+
+.front-btn {
+  padding: 0.85rem 2rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.25s ease;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.front-btn-primary {
+  background-color: #3b82f6;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.front-btn-primary:hover {
+  background-color: #2563eb;
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.55);
+}
+
+.front-btn-outline {
+  border: 2px solid #3b82f6;
+  color: #3b82f6;
+}
+
+.front-btn-outline:hover {
+  background-color: #3b82f6;
+  color: #ffffff;
+}
+
+/* ===============================
+   SECONDARY ACTIONS (REGISTER LINKS)
+   =============================== */
+.front-secondary-actions {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: #cdd1dd;
+  opacity: 0.95;
+}
+
+.front-link {
+  color: #3b82f6;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.front-link:hover {
+  text-decoration: underline;
+}
+
+/* ===============================
+   FOOTER
+   =============================== */
+.front-footer {
+  padding: 1rem;
+  font-size: 0.9rem;
+  opacity: 0.6;
+  background: rgba(255, 255, 255, 0.03);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ===============================
+   ANIMATIONS
+   =============================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===============================
+   RESPONSIVENESS
+   =============================== */
+@media (max-width: 768px) {
+  .front-title {
+    font-size: 2.2rem;
+  }
+
+  .front-tagline {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .front-content {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .front-btn {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .front-title {
+    font-size: 1.8rem;
+  }
+
+  .front-tagline {
+    font-size: 0.95rem;
+  }
+}
