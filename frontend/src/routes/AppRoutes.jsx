@@ -93,7 +93,16 @@ const AppRoutes = () => {
 
         <Route
           path="/food-partner/:id"
-          element={user ? <Profile /> : <Navigate to="/" replace />}
+          element={
+            user ? (
+              <>
+                <Profile />
+                <BottomNav />
+              </>
+            ) : (
+              <Navigate to="/" replace />
+            )
+          }
         />
       </Routes>
     </Router>
